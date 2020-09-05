@@ -1,0 +1,477 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Recruit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper" class="wrapper-with-transparent-header">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth transparent-header">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="images/logo2.png" data-sticky-logo="images/logo.png" data-transparent-logo="images/logo2.png" alt=""></a>
+                    </div>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+
+                <!-- 雇员登录信息 -->
+                <div class="right-side" th:if="${session.employee != null}">
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employee.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employee.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employee.username}]] <span>自由职业者</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employee/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</span>
+
+                </div>
+
+                <!-- 雇主登录信息 -->
+                <div class="right-side" th:if="${session.employer != null}">
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employer.username}]] <span>雇主</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employer/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</span>
+
+                </div>
+
+                <!-- 未登录 -->
+                <div class="right-side" th:if="${session.employee == null && session.employer == null}">
+
+                    <div class="header-widget">
+                        <a href="/login" class="log-in-button" style="margin-top: -24px;"><i class="icon-feather-log-in"></i> <span>登录</span></a>
+                        <a href="/register" class="log-in-button"><i class="icon-feather-log-in"></i> <span>注册</span></a>
+                    </div>
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+                        <button class="hamburger hamburger--collapse" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+				    </span>
+
+                </div>
+
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+
+    <!-- Intro Banner
+    ================================================== -->
+    <div class="intro-banner dark-overlay" data-background-image="/images/home-background-02.jpg">
+
+        <!-- Transparent Header Spacer -->
+        <div class="transparent-header-spacer"></div>
+
+        <div class="container">
+
+            <!-- Intro Headline -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="banner-headline">
+                        <h3>
+                            <strong>Jenkins + Docker + Docker Compose + Harbor 实现 Spring Boot 项目持续集成.</strong>
+                            <br>
+                            <span>优秀的设计师，开发人员供您选择.</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="intro-banner-search-form margin-top-95">
+
+                        <!-- Search Field -->
+                        <div class="intro-search-field">
+                            <label for ="key" class="field-title ripple-effect">您想要做什么?</label>
+                            <input id="key"  type="text" placeholder="例如：Java Web 网站">
+                        </div>
+
+                        <!-- Search Field -->
+                        <div class="intro-search-field">
+                            <select class="selectpicker default" id="category" data-selected-text-format="count" title="所有任务分类" >
+                                <option th:value="${taskCategory.id}" th:each="taskCategory : ${taskCategories}">[[${taskCategory.categoryName}]]</option>
+                            </select>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="intro-search-button">
+                            <button class="button ripple-effect" onclick="search()">搜索</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="intro-stats margin-top-45 hide-under-992px">
+                        <li>
+                            <strong class="counter">[[${taskCount}]]</strong>
+                            <span>任务发布</span>
+                        </li>
+                        <li>
+                            <strong class="counter">[[${employeeCount}]]</strong>
+                            <span>自由职业者</span>
+                        </li>
+                        <li>
+                            <strong class="counter">[[${employerCount}]]</strong>
+                            <span>雇主</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Content
+    ================================================== -->
+
+    <!-- Popular Job Categories -->
+    <div class="section margin-top-65 margin-bottom-30">
+        <div class="container">
+            <div class="row">
+
+                <!-- Section Headline -->
+                <div class="col-xl-12">
+                    <div class="section-headline centered margin-top-0 margin-bottom-45">
+                        <h3>热门分类</h3>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6" th:each="taskCategory : ${popularCategories}">
+                    <!-- Photo Box -->
+                    <a th:href="@{'/task/list?categoryId=' + ${taskCategory.id}}" class="photo-box small" th:attr="data-background-image=${taskCategory.categoryImg}">
+                        <div class="photo-box-content">
+                            <h3>[[${taskCategory.categoryName}]]</h3>
+                            <span>[[${taskCategory.taskCount}]]</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Features Cities / End -->
+
+
+
+    <!-- Features Jobs -->
+    <div class="section gray margin-top-45 padding-top-65 padding-bottom-75">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+
+                    <!-- Section Headline -->
+                    <div class="section-headline margin-top-0 margin-bottom-35">
+                        <h3>近期任务</h3>
+                        <a href="/task/list" class="headline-link">浏览所有任务</a>
+                    </div>
+
+                    <!-- Jobs Container -->
+                    <div class="tasks-list-container compact-list margin-top-35" th:each="task : ${recentTasks}">
+
+                        <!-- Task -->
+                        <a th:href="@{'/task/page?taskId=' + ${task.id}}" class="task-listing">
+
+                            <!-- Job Listing Details -->
+                            <div class="task-listing-details">
+
+                                <!-- Details -->
+                                <div class="task-listing-description">
+                                    <h3 class="task-listing-title">[[${task.taskTitle}]]</h3>
+                                    <ul class="task-icons">
+                                        <li>[[${task.taskProfile}]]</li>
+                                        <li><i class="icon-material-outline-access-time"></i> [[${task.beforeTime}]]</li>
+                                    </ul>
+                                    <div class="task-tags margin-top-15">
+                                        <span th:each="skill: ${task.skills}" style="margin-left: 5px;">[[${skill.skillName}]]</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="task-listing-bid">
+                                <div class="task-listing-bid-inner">
+                                    <div class="task-offers">
+                                        <strong>￥[[${task.feesLow}]] - ￥[[${task.feesHigh}]]</strong>
+                                    </div>
+                                    <span class="button button-sliding-icon ripple-effect">现在投标<i class="icon-material-outline-arrow-right-alt"></i></span>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <!-- Jobs Container / End -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured Jobs / End -->
+
+    <!-- Icon Boxes -->
+    <div class="section padding-top-65 padding-bottom-65">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xl-12">
+                    <!-- Section Headline -->
+                    <div class="section-headline centered margin-top-0 margin-bottom-5">
+                        <h3>如何使用本网站?</h3>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-md-4">
+                    <!-- Icon Box -->
+                    <div class="icon-box with-line">
+                        <!-- Icon -->
+                        <div class="icon-box-circle">
+                            <div class="icon-box-circle-inner">
+                                <i class="icon-line-awesome-lock"></i>
+                                <div class="icon-box-check"><i class="icon-material-outline-check"></i></div>
+                            </div>
+                        </div>
+                        <h3>创建一个账户</h3>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-md-4">
+                    <!-- Icon Box -->
+                    <div class="icon-box with-line">
+                        <!-- Icon -->
+                        <div class="icon-box-circle">
+                            <div class="icon-box-circle-inner">
+                                <i class="icon-line-awesome-legal"></i>
+                                <div class="icon-box-check"><i class="icon-material-outline-check"></i></div>
+                            </div>
+                        </div>
+                        <h3>选择（发布任务）</h3>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-md-4">
+                    <!-- Icon Box -->
+                    <div class="icon-box">
+                        <!-- Icon -->
+                        <div class="icon-box-circle">
+                            <div class="icon-box-circle-inner">
+                                <i class=" icon-line-awesome-trophy"></i>
+                                <div class="icon-box-check"><i class="icon-material-outline-check"></i></div>
+                            </div>
+                        </div>
+                        <h3>完成任务（选择自由职业者）</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Icon Boxes / End -->
+
+    <!-- Footer
+    ================================================== -->
+    <div id="footer">
+
+        <!-- Footer Top Section -->
+        <div class="footer-top-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+
+                        <!-- Footer Rows Container -->
+                        <div class="footer-rows-container">
+
+                            <!-- Left Side -->
+                            <div class="footer-rows-left">
+                                <div class="footer-row">
+                                    <div class="footer-row-inner footer-logo">
+                                        <img src="images/logo2.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Footer Rows Container / End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Top Section / End -->
+        <!-- Footer Copyrights -->
+        <div class="footer-bottom-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        © 2018 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Copyrights / End -->
+
+    </div>
+    <!-- Footer / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+
+<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+<script>
+    /**
+     * 搜索
+     */
+    function search() {
+        // 获取分类 ID
+        var categoryId = $("#category").val()
+        // 获取搜索结果
+        var key = $("#key").val()
+        console.log(categoryId)
+        console.log(key)
+        if (categoryId == "") {
+            categoryId = 0
+        }
+        // 页面跳转
+        window.location.href = "/task/list?categoryId=" + categoryId + "&key=" + key;
+    }
+</script>
+
+
+
+</body>
+</html>

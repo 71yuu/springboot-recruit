@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuu.recruit.mapper.TaskSkillMapper">
+  <resultMap id="BaseResultMap" type="com.yuu.recruit.domain.TaskSkill">
+    <!--@mbg.generated generated on Wed Oct 16 01:25:45 CST 2019.-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="skill_name" jdbcType="VARCHAR" property="skillName" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Oct 16 01:25:45 CST 2019.-->
+    id, skill_name, task_id
+  </sql>
+</mapper>

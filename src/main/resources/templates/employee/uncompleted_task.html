@@ -1,0 +1,273 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth dashboard-header not-sticky">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="/images/logo.png" alt=""></a>
+                    </div>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employee.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employee.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employee.username}]] <span>[[${session.employee.tagline}]]</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employee/settings/base"><i class="icon-material-outline-settings"></i> 设置</a></li>
+                                    <li><a href="/employee/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+                    </span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- ================================================== -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-sidebar-inner" data-simplebar>
+                <div class="dashboard-nav-container">
+
+                    <!-- Navigation -->
+                    <div class="dashboard-nav">
+                        <div class="dashboard-nav-inner">
+
+                            <ul>
+                                <li><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i> 首页</a></li>
+                                <li><a href="/employee/bookmarks"><i class="icon-material-outline-star-border"></i>我的收藏</a></li>
+                                <li class="active active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> 任务</a>
+                                    <ul>
+                                        <li><a href="/employee/task/completed">已完成任务</a></li>
+                                        <li class="active"><a href="/employee/task/uncompleted">待完成任务</a></li>
+                                        <li><a href="/employee/mybids">我的竞标</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><i class="icon-material-outline-settings"></i> 个人设置</a>
+                                    <ul>
+                                        <li><a href="/employee/settings/base">基本信息</a></li>
+                                        <li><a href="/employee/settings/password">修改密码</a></li>
+                                    </ul>
+                                </li>
+                                <li><a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${session.employee.id}}"><i class="icon-material-outline-home"></i> 我的主页</a></li>
+                                <li><a href="/employee/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <!-- Navigation / End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Sidebar / End -->
+
+
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner" >
+
+                <!-- Dashboard Headline -->
+                <div class="dashboard-headline">
+                    <h3>待完成任务</h3>
+                </div>
+
+                <!-- Row -->
+                <div class="row">
+
+                    <!-- Dashboard Box -->
+                    <div class="col-xl-12">
+                        <div class="dashboard-box margin-top-0">
+
+                            <!-- Headline -->
+                            <div class="headline">
+                                <h3><i class="icon-material-outline-assignment"></i>待完成任务</h3>
+                            </div>
+
+                            <div class="content">
+                                <ul class="dashboard-box-list">
+                                    <li th:if="${tasks.size() == 0}">
+                                        暂无待完成任务！
+                                    </li>
+                                    <li th:each="task : ${tasks}">
+                                        <!-- Job Listing -->
+                                        <div class="job-listing width-adjustment">
+
+                                            <!-- Job Listing Details -->
+                                            <div class="job-listing-details">
+
+                                                <!-- Logo -->
+                                                <a href="#" class="job-listing-company-logo">
+                                                    <img th:src="${task.employer.headImg}" th:alt="${task.employer.username}">
+                                                </a>
+
+                                                <!-- Details -->
+                                                <div class="job-listing-description">
+                                                    <h3 class="job-listing-title"><a href="#">[[${task.taskTitle}]]</a></h3>
+
+                                                    <!-- Job Listing Footer -->
+                                                    <div class="job-listing-footer">
+                                                        <ul>
+                                                            <li>[[${task.taskProfile}]]</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Task Details -->
+                                        <span th:if="${task.taskStatus == 1}" class="button button-sliding-icon ripple-effect" th:onclick="'completeTask('+ ${task.id} +')'">完成任务<i class="icon-material-outline-arrow-right-alt"></i></span>
+                                        <span th:if="${task.taskStatus == 2}" class="button">等待雇主确认完成</span>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Row / End -->
+
+                <!-- Footer -->
+                <div class="dashboard-footer-spacer"></div>
+                <div class="small-footer margin-top-15">
+                    <div class="small-footer-copyrights">
+                        @ 2019 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+                <!-- Footer / End -->
+
+            </div>
+        </div>
+        <!-- Dashboard Content / End -->
+
+    </div>
+    <!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+
+
+<!-- 自定义 Script -->
+<script>
+    /**
+     * 完成任务
+     */
+    function completeTask(taskId) {
+        // 确认框
+        layer.confirm('您确认提交完成任务吗？', function(index){
+            $.post({
+                url: '/employee/task/submit',
+                data: {
+                    "taskId": taskId
+                },
+                success: function (data) {
+                    layer.msg(data)
+                    // 1 秒后刷新页面
+                    setTimeout(function () {
+                        window.location.href = "/employee/task/uncompleted"
+                    }, 500)
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.href = "/login"
+                    }
+                }
+            })
+        });
+    }
+</script>
+</body>
+</html>

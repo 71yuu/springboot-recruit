@@ -1,0 +1,376 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth dashboard-header not-sticky">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="/images/logo.png" alt=""></a>
+                    </div>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employer.username}]]<span>雇主</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employer/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+                    </span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- Dashboard Sidebar
+        ================================================== -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-sidebar-inner" data-simplebar>
+                <div class="dashboard-nav-container">
+
+                    <!-- Navigation -->
+                    <div class="dashboard-nav">
+                        <div class="dashboard-nav-inner">
+
+                            <ul>
+                                <li><a href="/employer/dashboard"><i class="icon-material-outline-dashboard"></i> 首页</a></li>
+                                <li  class="active active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> 任务</a>
+                                    <ul>
+                                        <li class="active"><a href="/employer/myTasks">管理任务</a></li>
+                                        <li><a href="/employer/task/post">发布任务</a></li>
+                                    </ul>
+                                </li>
+                                <li ><a href="#"><i class="icon-material-outline-settings"></i> 个人设置</a>
+                                    <ul>
+                                        <li><a href="/employer/settings/base">基本信息</a></li>
+                                        <li><a href="/employer/settings/password">修改密码</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <!-- Navigation / End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Sidebar / End -->
+
+
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner" >
+
+                <!-- Dashboard Headline -->
+                <div class="dashboard-headline">
+                    <h3>修改任务</h3>
+                </div>
+
+                <!-- Row -->
+                <div class="row">
+
+                    <!-- Dashboard Box -->
+                    <div class="col-xl-12">
+                        <form method="post" action="/employer/task/update" onsubmit="return postTask()">
+                            <input th:hidden="true" th:value="${task.id}" name="id"/>
+                            <div class="dashboard-box margin-top-0">
+
+                                <!-- Headline -->
+                                <div class="headline">
+                                    <h3><i class="icon-feather-folder-plus"></i> 修改任务</h3>
+                                </div>
+
+                                <div class="content with-padding padding-bottom-10">
+                                    <div class="row">
+
+                                        <div class="col-xl-6">
+                                            <div class="submit-field">
+                                                <h5>任务名称</h5>
+                                                <input name="taskTitle" th:value="${task.taskTitle}" type="text" class="with-border" placeholder="例如：构建一个 Java WEB 网站" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="submit-field">
+                                                <h5>任务分类</h5>
+                                                <select name="categoryId" class="selectpicker with-border"  title="请选择任务分类" required>
+                                                    <option th:selected="${task.taskCategory.id == category.id}" th:value="${category.id}" th:each="category : ${taskCategories}">[[${category.categoryName}]]</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-12">
+                                            <div class="submit-field">
+                                                <h5>任务简介</h5>
+                                                <input th:value="${task.taskProfile}" name="taskProfile" type="text" class="with-border" placeholder="一句话描述您的任务" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="submit-field">
+                                                <h5>您的预算是多少?</h5>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="input-with-icon">
+                                                            <input id="feesLow" th:value="${task.feesLow}" name="feesLow" class="with-border" type="number" placeholder="最低预算" required>
+                                                            <i class="currency">元</i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="input-with-icon">
+                                                            <input id="feesHigh" th:value="${task.feesHigh}" name="feesHigh" class="with-border" type="number" placeholder="最高预算" required>
+                                                            <i class="currency">元</i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="submit-field">
+                                                <h5>该任务需要什么技能? <i class="help-icon" data-tippy-placement="right" title="上传技能标签去描述您的任务"></i></h5>
+                                                <div class="keywords-container">
+                                                    <div class="keyword-input-container">
+                                                        <input id="skill" type="text" class="keyword-input with-border" placeholder="添加技能"/>
+                                                        <button onclick="addSkill()" type="button" class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+                                                    </div>
+                                                    <div class="keywords-list"><!-- keywords go here -->
+                                                        <span class="keyword" th:each="skill : ${task.skills}"><span class="keyword-remove" th:onclick="removeSkill([[${skill.id}]])"></span><span class="keyword-text">[[${skill.skillName}]]</span></span>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <input type="hidden" name="skills" id="skills"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-12">
+                                            <div class="submit-field">
+                                                <h5>任务描述</h5>
+                                                <textarea name="taskDesc" cols="30" rows="5" class="with-border" required th:text="${task.taskDesc}"></textarea>
+                                                <div class="uploadButton margin-top-30">
+                                                    <input onchange="updateFile()" class="uploadButton-input" type="file" accept="image/*, application/pdf" name="upload" id="upload" multiple/>
+                                                    <label class="uploadButton-button ripple-effect" for="upload">上传附件</label>
+                                                    <span class="uploadButton-file-name">只允许上传图片和PDF格式的文件</span>
+                                                    <input id="feesFile" th:hidden="true" name="feesFile" th:value="${task.feesFile}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <button type="submit" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> 修改任务</button>
+                            </div>
+
+                            <input name="taskStatus" th:hidden="true" th:value="${task.taskStatus}">
+                        </form>
+                    </div>
+                </div>
+                <!-- Row / End -->
+
+                                <!-- Footer -->
+                <div class="dashboard-footer-spacer"></div>
+                <div class="small-footer margin-top-15">
+                    <div class="small-footer-copyrights">
+                        @ 2019 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+                <!-- Footer / End -->
+
+            </div>
+        </div>
+        <!-- Dashboard Content / End -->
+
+    </div>
+    <!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+<script src="/js/ajaxfileupload.js"></script>
+
+<!-- 自定义 Script -->
+<script>
+
+    // 获取发布任务返回的消息
+    $(function () {
+        var msg = "[[${msg}]]"
+        console.log(msg)
+        if (msg != "") {
+            layer.msg(msg)
+        }
+    })
+
+    function postTask() {
+        var feesLow = Number($("#feesLow").val());
+        var feesHigh = Number($("#feesHigh").val());
+
+        if (feesLow >= feesHigh) {
+            layer.msg('请输入正确的价格区间')
+            return false
+        }
+
+        return true
+    }
+
+    /**
+     * 删除任务技能标签
+     */
+    $(".keyword-remove").click(function () {
+        var skill = $(".keyword-text")
+        console.log(skill.length)
+        console.log(skill[1].innerText)
+        var skillsStr = "";
+        for (let i = 0; i < skill.length; i++) {
+            if (i == skill.length - 1) {
+                skillsStr += skill[i].innerText
+            } else {
+                skillsStr += skill[i].innerText + ","
+            }
+        }
+        $("#skills").val(skillsStr)
+    })
+
+
+    // 上传附件
+    function updateFile() {
+        $.ajaxFileUpload({
+            url:'/uploadFile',//用于文件上传的服务器端请求地址
+            secureuri:false ,//一般设置为false
+            fileElementId:'upload',//文件上传控件的id属性  <input type="file" id="upload" name="upload" />
+            dataType: 'text',//返回值类型 一般设置为json
+            success: function (responseText)  //服务器成功响应处理函数
+            {
+                var obj = $.parseJSON(responseText.toString().replace(/<.*?>/ig,""));
+                $("#feesFile").val(obj.filePath)
+                layer.alert("附件上传成功！")
+            }
+        });
+    }
+
+    /**
+     * 添加技能
+     */
+    function addSkill() {
+        var skillName = $("#skill").val()
+        var taskId = [[${task.id}]]
+        $.post({
+            url: '/employer/skill/add',
+            data: {
+                "skillName": skillName,
+                "taskId": taskId
+            }
+        })
+    }
+
+    /**
+     * 删除技能
+     */
+    function removeSkill(skillId) {
+        $.post({
+            url: '/employer/skill/delete',
+            data: {
+                "skillId": skillId
+            }
+        })
+    }
+</script>
+
+</body>
+</html>
+</html>

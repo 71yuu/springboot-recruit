@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuu.recruit.mapper.HomeBowerMapper">
+  <resultMap id="BaseResultMap" type="com.yuu.recruit.domain.HomeBower">
+    <!--@mbg.generated generated on Tue Oct 15 08:38:56 CST 2019.-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="employee_id" jdbcType="BIGINT" property="employeeId" />
+    <result column="employer_id" jdbcType="BIGINT" property="employerId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Oct 15 08:38:56 CST 2019.-->
+    id, employee_id, employer_id, create_time
+  </sql>
+</mapper>

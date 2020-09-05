@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuu.recruit.mapper.TaskCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.yuu.recruit.domain.TaskCategory">
+    <!--@mbg.generated generated on Wed Oct 16 22:59:57 CST 2019.-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="category_img" jdbcType="VARCHAR" property="categoryImg" />
+    <result column="is_popular" jdbcType="TINYINT" property="isPopular" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Oct 16 22:59:57 CST 2019.-->
+    id, category_name, category_img, is_popular
+  </sql>
+</mapper>

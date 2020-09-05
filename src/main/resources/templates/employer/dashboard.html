@@ -1,0 +1,236 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth dashboard-header not-sticky">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="/images/logo.png" alt=""></a>
+                    </div>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employer.username}]]<span>雇主</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employer/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+				</span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- Dashboard Sidebar
+        ================================================== -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-sidebar-inner" data-simplebar>
+                <div class="dashboard-nav-container">
+
+                    <!-- Navigation -->
+                    <div class="dashboard-nav">
+                        <div class="dashboard-nav-inner">
+
+                            <ul>
+                                <li class="active"><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i> 首页</a></li>
+                                <li><a href="#"><i class="icon-material-outline-assignment"></i> 任务</a>
+                                    <ul>
+                                        <li><a href="/employer/myTasks">管理任务</a></li>
+                                        <li><a href="/employer/task/post">发布任务</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><i class="icon-material-outline-settings"></i> 个人设置</a>
+                                    <ul>
+                                        <li><a href="/employer/settings/base">基本信息</a></li>
+                                        <li><a href="/employer/settings/password">修改密码</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <!-- Navigation / End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Sidebar / End -->
+
+
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner" >
+
+                <!-- Dashboard Headline -->
+                <div class="dashboard-headline">
+                    <h3>你好, [[${session.employer.username}]]!</h3>
+                    <span>很高兴再次见到你!</span>
+                </div>
+
+                <!-- Fun Facts Container -->
+                <div class="fun-facts-container">
+                    <div class="fun-fact" data-fun-fact-color="#36bd78">
+                        <div class="fun-fact-text">
+                            <span>总发布任务</span>
+                            <h4>[[${taskCount}]]</h4>
+                        </div>
+                        <div class="fun-fact-icon"><i class="icon-material-outline-gavel"></i></div>
+                    </div>
+
+                    <!-- Last one has to be hidden below 1600px, sorry :( -->
+                    <div class="fun-fact" data-fun-fact-color="#2a41e6">
+                        <div class="fun-fact-text">
+                            <span>任务总投标人数</span>
+                            <h4>[[${bidCount}]]</h4>
+                        </div>
+                        <div class="fun-fact-icon"><i class="icon-feather-trending-up"></i></div>
+                    </div>
+                </div>
+
+                <!-- Row -->
+                <div class="row">
+                    <!-- Dashboard Box -->
+                    <div class="col-xl-12">
+                        <div class="dashboard-box">
+                            <div class="headline">
+                                <h3><i class="icon-material-baseline-notifications-none"></i> 最近任务提交请求</h3>
+                            </div>
+                            <div class="content">
+                                <ul class="dashboard-box-list">
+                                    <li th:if="${tasks.size() == 0}">
+                                        暂无任何任务提交请求！
+                                    </li>
+                                    <li th:each="task : ${tasks}">
+                                        <span class="notification-icon"><i class=" icon-material-outline-gavel"></i></span>
+                                        <span class="notification-text">
+                                            <strong><font style="vertical-align: inherit;"><a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${task.employee.id}}"><font style="vertical-align: inherit;">[[${task.employee.username}]] </font></a></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交了</font></font><a target="_blank" th:href="@{'/task/page?taskId=' + ${task.id}}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> [[${task.taskTitle}]] </font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">完成的请求
+									            </font></font></span>
+                                        <!-- Buttons -->
+                                        <div class="buttons-to-right single-right-button">
+                                            <a th:href="@{'task/success?taskId=' + ${task.id}}" class="button ripple-effect ico" data-tippy-placement="left" data-tippy="" data-original-title="确认完成"><i class="icon-feather-check-square"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row / End -->
+
+                <!-- Footer -->
+                <div class="dashboard-footer-spacer"></div>
+                <div class="small-footer margin-top-15">
+                    <div class="small-footer-copyrights">
+                        @ 2019 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+                <!-- Footer / End -->
+
+            </div>
+        </div>
+        <!-- Dashboard Content / End -->
+
+    </div>
+    <!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+
+
+</body>
+</html>

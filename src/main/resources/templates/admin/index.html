@@ -1,0 +1,424 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+    <meta name="author" content="Creative Tim">
+    <title>后台管理系统 - 首页</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="">
+    <!-- Icons -->
+    <link rel="stylesheet" href="/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+    <link rel="stylesheet" href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <!-- Page plugins -->
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="/assets/css/argon.css?v=1.1.0" type="text/css">
+</head>
+
+<body>
+<!-- Sidenav -->
+<nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+        <!-- Brand -->
+        <div class="sidenav-header d-flex align-items-center">
+            <a class="navbar-brand" href="/admin/index">
+                <img src="/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            </a>
+            <div class="ml-auto">
+                <!-- Sidenav toggler -->
+                <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">
+                    <div class="sidenav-toggler-inner">
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <!-- Nav items -->
+                <div class="navbar-inner">
+                    <!-- Collapse -->
+                    <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                        <!-- Nav items -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/admin/index" role="button" aria-expanded="false" aria-controls="navbar-dashboards">
+                                    <i class="ni ni-shop text-primary"></i>
+                                    <span class="nav-link-text">首页</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                                    <i class="ni ni-ungroup text-orange"></i>
+                                    <span class="nav-link-text">任务分类管理</span>
+                                </a>
+                                <div class="collapse" id="navbar-examples">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="/admin/task/category" class="nav-link">任务分类列表</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#navbar-employer" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-employer">
+                                    <i class="ni ni-circle-08"></i>
+                                    <span class="nav-link-text">雇主管理</span>
+                                </a>
+                                <div class="collapse " id="navbar-employer">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item ">
+                                            <a href="/admin/employer/" class="nav-link">雇主列表</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#navbar-employee" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-employee">
+                                    <i class="ni ni-single-02"></i>
+                                    <span class="nav-link-text">雇员管理</span>
+                                </a>
+                                <div class="collapse" id="navbar-employee">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="/admin/employee/" class="nav-link">雇员列表</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#navbar-task" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-task">
+                                    <i class="ni ni-credit-card"></i>
+                                    <span class="nav-link-text">任务管理</span>
+                                </a>
+                                <div class="collapse" id="navbar-task">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="/admin/task/" class="nav-link">任务列表</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/admin/task/check" class="nav-link">待审核任务列表</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Main content -->
+<div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar links -->
+                <ul class="navbar-nav align-items-center ml-md-auto">
+                </ul>
+                <ul class="navbar-nav align-items-center ml-auto ml-md-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="media align-items-center">
+                              <span class="avatar avatar-sm rounded-circle">
+                                <img alt="Image placeholder" src="/assets/img/timg.png">
+                              </span>
+                                <div class="media-body ml-2 d-none d-lg-block">
+                                    <span class="mb-0 text-sm  font-weight-bold">[[${session.admin.username}]]</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome!</h6>
+                            </div>
+                            <a href="/admin/task/category/" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>任务分类列表</span>
+                            </a>
+                            <a href="/admin/employer/" class="dropdown-item">
+                                <i class="ni ni-settings-gear-65"></i>
+                                <span>雇主列表</span>
+                            </a>
+                            <a href="/admin/employee/" class="dropdown-item">
+                                <i class="ni ni-calendar-grid-58"></i>
+                                <span>雇员列表</span>
+                            </a>
+                            <a href="/admin/task" class="dropdown-item">
+                                <i class="ni ni-support-16"></i>
+                                <span>任务列表</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/admin/logout" class="dropdown-item">
+                                <i class="ni ni-user-run"></i>
+                                <span>退出登录</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <h6 class="h2 text-white d-inline-block mb-0">控制面板</h6>
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="/admin/index"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="/admin/index">首页</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <!-- Card stats -->
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">总雇主数量</h5>
+                                        <span class="h2 font-weight-bold mb-0">[[${employeeCount}]]</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                            <i class="ni ni-active-40"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">总雇员数量</h5>
+                                        <span class="h2 font-weight-bold mb-0">[[${employerCount}]]</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                            <i class="ni ni-chart-pie-35"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">总任务成交数量</h5>
+                                        <span class="h2 font-weight-bold mb-0">[[${allTaskCompleteCount}]]</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                            <i class="ni ni-money-coins"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">总任务成交金额</h5>
+                                        <span class="h2 font-weight-bold mb-0">￥[[${allTaskCompletePrice}]]</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                            <i class="ni ni-chart-bar-32"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card bg-default">
+                    <div class="card-header bg-transparent">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="text-light text-uppercase ls-1 mb-1">用户数量增长趋势</h6>
+                            </div>
+                            <div class="col">
+                                <ul class="nav nav-pills justify-content-end">
+                                    <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
+                                        <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
+                                            <span class="d-none d-md-block">本周</span>
+                                            <span class="d-md-none">M</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
+                                        <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
+                                            <span class="d-none d-md-block">上周</span>
+                                            <span class="d-md-none">W</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Chart -->
+                        <div class="chart">
+                            <!-- Chart wrapper -->
+                            <canvas id="chart-sales-dark" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="row">
+
+                </div>
+                <!-- Members list group card -->
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header">
+                        <!-- Title -->
+                        <h5 class="h3 mb-0">最新注册雇员</h5>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- List group -->
+                        <ul class="list-group list-group-flush list my--3">
+                            <li class="list-group-item px-0" th:each="employee : ${employees}">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${employee.id}}" class="avatar rounded-circle">
+                                            <img alt="Image placeholder" th:src="${employee.headImg}">
+                                        </a>
+                                    </div>
+                                    <div class="col ml--2">
+                                        <h4 class="mb-0">
+                                            <a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${employee.id}}">[[${employee.username}]]</a>
+                                        </h4>
+                                    </div>
+                                    <div class="col ml--8">
+                                        <h4 class="mb-0">
+                                            [[${#dates.format(employee.createTime, 'yyyy-MM-dd HH:mm:ss')}]]
+                                        </h4>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header border-0">
+                                <h3 class="mb-0">最近成交任务</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">任务名称</th>
+                                        <th scope="col">雇主</th>
+                                        <th scope="col">雇员</th>
+                                        <th scope="col">成交价格</th>
+                                        <th scope="col">成交时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                    <tr th:each="task : ${taskVos}">
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <a target="_blank" th:href="@{'/task/page?taskId=' + ${task.id}}"><span class="name mb-0 text-sm">[[${task.taskTitle}]]</span></a>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="budget">
+                                            [[${task.employer.username}]]
+                                        </td>
+                                        <td>
+                                            <div class="avatar-group">
+                                                <a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${task.employee.id}}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" th:attr="data-original-title=${task.employee.username}">
+                                                    <img alt="Image placeholder" th:src="${task.employee.headImg}">
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            ￥[[${task.taskPrice}]]
+                                        </td>
+                                        <td>
+                                            [[${#dates.format(task.createTime, 'yyyy-MM-dd HH:mm:ss')}]]
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer pt-0">
+            <div class="row align-items-center justify-content-lg-between">
+                <div class="col-lg-6">
+                    <div class="copyright text-center text-lg-left text-muted">
+                        &copy; 2019 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">yuu</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<!-- Argon Scripts -->
+<!-- Core -->
+<script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/js-cookie/js.cookie.js"></script>
+<script src="/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+<script src="/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+<!-- Optional JS -->
+<script src="/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+<!-- Argon JS -->
+<script src="/assets/js/argon.js?v=1.1.0"></script>
+<!-- Demo JS - remove this in your project -->
+<script src="/assets/js/demo.min.js"></script>
+</body>
+
+</html>

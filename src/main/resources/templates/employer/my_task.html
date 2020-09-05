@@ -1,0 +1,341 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth dashboard-header not-sticky">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="/images/logo.png" alt=""></a>
+                    </div>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employer.username}]]<span>雇主</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employer/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+                    </span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- Dashboard Sidebar
+        ================================================== -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-sidebar-inner" data-simplebar>
+                <div class="dashboard-nav-container">
+
+                    <!-- Navigation -->
+                    <div class="dashboard-nav">
+                        <div class="dashboard-nav-inner">
+
+                            <ul>
+                                <li><a href="/employer/dashboard"><i class="icon-material-outline-dashboard"></i> 首页</a></li>
+                                <li  class="active active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> 任务</a>
+                                    <ul>
+                                        <li class="active"><a href="/employer/myTasks">管理任务</a></li>
+                                        <li><a href="/employer/task/post">发布任务</a></li>
+                                    </ul>
+                                </li>
+                                <li ><a href="#"><i class="icon-material-outline-settings"></i> 个人设置</a>
+                                    <ul>
+                                        <li><a href="/employer/settings/base">基本信息</a></li>
+                                        <li><a href="/employer/settings/password">修改密码</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <!-- Navigation / End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Sidebar / End -->
+
+
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner" >
+
+                <!-- Dashboard Headline -->
+                <div class="dashboard-headline">
+                    <h3>任务管理</h3>
+                </div>
+
+                <!-- Row -->
+                <div class="row">
+
+                    <!-- Dashboard Box -->
+                    <div class="col-xl-12">
+                        <div class="dashboard-box margin-top-0">
+
+                            <!-- Headline -->
+                            <div class="headline">
+                                <h3><i class="icon-material-outline-assignment"></i> 我的任务</h3>
+                            </div>
+
+                            <div class="content">
+                                <ul class="dashboard-box-list">
+                                    <li th:each="task : ${tasks}">
+                                        <!-- Job Listing -->
+                                        <div class="job-listing width-adjustment">
+
+                                            <!-- Job Listing Details -->
+                                            <div class="job-listing-details">
+
+                                                <!-- Details -->
+                                                <div class="job-listing-description">
+                                                    <h3 class="job-listing-title">
+                                                        <a th:href="@{'/task/page?taskId=' + ${task.id}}" th:if="${task.taskStatus == 0 || task.taskStatus == 1 || task.taskStatus == 2 || task.taskStatus == 3}">[[${task.taskTitle}]]</a>
+                                                        <a href="#" th:if="${task.taskStatus == -2 || task.taskStatus == -1}">[[${task.taskTitle}]]</a>
+                                                        <a href="#" th:if="${task.taskStatus == -1 || task.taskStatus == -2}">[[${task.taskTitle}]]</a>
+                                                        <span class="dashboard-status-button yellow" th:if="${task.taskStatus == -2}">审核失败</span>
+                                                        <span class="dashboard-status-button yellow" th:if="${task.taskStatus == -1}">等待审核中</span>
+                                                        <span class="dashboard-status-button yellow" th:if="${task.taskStatus == 0}">还未人中标该任务</span>
+                                                        <span class="dashboard-status-button yellow" th:if="${task.taskStatus == 1}">等待雇员完成任务</span>
+                                                        <span class="dashboard-status-button yellow" th:if="${task.taskStatus == 2}">等待确认完成</span>
+                                                        <span class="dashboard-status-button yellow" th:if="${task.taskStatus == 3}">已完成</span>
+                                                    </h3>
+
+                                                    <!-- Job Listing Footer -->
+                                                    <div class="job-listing-footer">
+                                                        <ul>
+                                                            <li th:if="${task.taskStatus == -2 || task.taskStatus == -1 || task.taskStatus == 0}">发布时间：<i class="icon-material-outline-access-time"></i> [[${#dates.format(task.createTime, 'yyyy-MM-dd HH:mm:ss')}]] </li>
+                                                            <li th:if="${task.taskStatus == 1 || task.taskStatus == 2}">中标时间：<i class="icon-material-outline-access-time"></i> [[${#dates.format(task.bidTime, 'yyyy-MM-dd HH:mm:ss')}]] </li>
+                                                            <li th:if="${task.taskStatus == 3}">完成时间：<i class="icon-material-outline-access-time"></i>[[${#dates.format(task.closeTime, 'yyyy-MM-dd HH:mm:ss')}]] </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <ul class="dashboard-task-info">
+                                            <li th:if="${task.taskStatus != -1 && task.taskStatus != -2}"><strong>[[${task.bidVos.size()}]]</strong><span>竞标者</span></li>
+                                            <li th:if="${task.taskStatus != -1 && task.taskStatus != -2}"><strong>￥[[${task.avgPrice}]]</strong><span>平均竞标价格</span></li>
+                                            <li th:if="${task.taskStatus == 1 || task.taskStatus == 2 || task.taskStatus == 3}"><strong>￥[[${task.taskPrice}]]</strong><span>成交价格</span></li>
+                                            <li th:if="${task.taskStatus == -1 || task.taskStatus == -2 || task.taskStatus == 0}"><strong>￥[[${task.feesLow}]] - ￥[[${task.feesHigh}]]</strong><span>项目预算</span></li>
+                                        </ul>
+
+                                        <!-- Buttons -->
+                                        <div class="buttons-to-right always-visible">
+                                            <a th:if="${task.taskStatus == 0 && task.bidVos.size() != 0}" th:href="@{'/employer/taskBidders?taskId=' + ${task.id}}" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> 管理竞标者 <span class="button-info">[[${task.bidVos.size()}]]</span></a>
+                                            <a target="_blank" th:if="${task.taskStatus == 1 || task.taskStatus == 2 || task.taskStatus == 3}" th:href="@{'/employee/profile?employeeId=' + ${task.employee.id}}" class="button ripple-effect"> 浏览雇员信息</a>
+                                            <a th:if="${task.taskStatus == 2}" th:href="@{'/employer/task/success?taskId=' + ${task.id}}" class="button ripple-effect">确认完成任务</a>
+                                            <a th:if="${task.taskStatus == 0 || task.taskStatus == -1 || task.taskStatus == -2}" th:href="@{'/employer/task/update?taskId=' + ${task.id}}" class="button gray ripple-effect ico" title="修改任务" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
+                                            <a th:if="${task.taskStatus ==  -2 || task.taskStatus == -1 || task.taskStatus == 0}" th:onclick="'deleteTask('+ ${task.id} +')'"  class="button gray ripple-effect ico" title="删除任务" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Row / End -->
+
+                                <!-- Footer -->
+                <div class="dashboard-footer-spacer"></div>
+                <div class="small-footer margin-top-15">
+                    <div class="small-footer-copyrights">
+                        @ 2019 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+                <!-- Footer / End -->
+
+            </div>
+        </div>
+        <!-- Dashboard Content / End -->
+
+    </div>
+    <!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+<!-- Leave a Review for Freelancer Popup
+================================================== -->
+<div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>评价雇员</h3>
+                    <span> <a href="#">Peter Valentín</a> for the project <a href="#">Simple Chrome Extension</a> </span>
+                </div>
+
+                <!-- Form -->
+                <form method="post" id="leave-review-form">
+
+                    <div class="feedback-yes-no">
+                        <strong>Was this delivered on budget?</strong>
+                        <div class="radio">
+                            <input id="radio-1" name="radio" type="radio" required>
+                            <label for="radio-1"><span class="radio-label"></span> Yes</label>
+                        </div>
+
+                        <div class="radio">
+                            <input id="radio-2" name="radio" type="radio" required>
+                            <label for="radio-2"><span class="radio-label"></span> No</label>
+                        </div>
+                    </div>
+
+                    <div class="feedback-yes-no">
+                        <strong>Was this delivered on time?</strong>
+                        <div class="radio">
+                            <input id="radio-3" name="radio2" type="radio" required>
+                            <label for="radio-3"><span class="radio-label"></span> Yes</label>
+                        </div>
+
+                        <div class="radio">
+                            <input id="radio-4" name="radio2" type="radio" required>
+                            <label for="radio-4"><span class="radio-label"></span> No</label>
+                        </div>
+                    </div>
+
+                    <div class="feedback-yes-no">
+                        <strong>Your Rating</strong>
+                        <div class="leave-rating">
+                            <input type="radio" name="rating" id="rating-radio-1" value="1" required>
+                            <label for="rating-radio-1" class="icon-material-outline-star"></label>
+                            <input type="radio" name="rating" id="rating-radio-2" value="2" required>
+                            <label for="rating-radio-2" class="icon-material-outline-star"></label>
+                            <input type="radio" name="rating" id="rating-radio-3" value="3" required>
+                            <label for="rating-radio-3" class="icon-material-outline-star"></label>
+                            <input type="radio" name="rating" id="rating-radio-4" value="4" required>
+                            <label for="rating-radio-4" class="icon-material-outline-star"></label>
+                            <input type="radio" name="rating" id="rating-radio-5" value="5" required>
+                            <label for="rating-radio-5" class="icon-material-outline-star"></label>
+                        </div><div class="clearfix"></div>
+                    </div>
+
+                    <textarea class="with-border" placeholder="Comment" name="message2" id="message2" cols="7" required></textarea>
+
+                </form>
+
+                <!-- Button -->
+                <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Leave a Review Popup / End -->
+
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+
+<script type="text/javascript">
+    function  deleteTask(taskId) {
+        layer.confirm("您确认删除该任务？", {btn: ['确定', '取消'], title: "提示"}, function () {
+            window.location.href = '/employer/task/delete?taskId=' + taskId
+        });
+    }
+</script>
+</body>
+</html>

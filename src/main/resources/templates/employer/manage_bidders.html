@@ -1,0 +1,280 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth dashboard-header not-sticky">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="/images/logo.png" alt=""></a>
+                    </div>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employer.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employer.username}]]<span>雇主</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employer/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+                    </span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- Dashboard Sidebar
+        ================================================== -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-sidebar-inner" data-simplebar>
+                <div class="dashboard-nav-container">
+
+                    <!-- Navigation -->
+                    <div class="dashboard-nav">
+                        <div class="dashboard-nav-inner">
+
+                            <ul>
+                                <li><a href="/employer/dashboard"><i class="icon-material-outline-dashboard"></i> 首页</a></li>
+                                <li  class="active active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> 任务</a>
+                                    <ul>
+                                        <li class="active"><a href="/employer/myTasks">管理任务</a></li>
+                                        <li><a href="/employer/task/post">发布任务</a></li>
+                                    </ul>
+                                </li>
+                                <li ><a href="#"><i class="icon-material-outline-settings"></i> 个人设置</a>
+                                    <ul>
+                                        <li><a href="/employer/settings/base">基本信息</a></li>
+                                        <li><a href="/employer/settings/password">修改密码</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/employer/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <!-- Navigation / End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Sidebar / End -->
+
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner" >
+
+                <!-- Dashboard Headline -->
+                <div class="dashboard-headline">
+                    <h3>管理竞标者</h3>
+                    <span class="margin-top-7"><a target="_blank" th:href="@{'/task/page?taskId=' + ${task.id}}">[[${task.taskTitle}]]</a> 的竞标者</span>
+                </div>
+
+                <!-- Row -->
+                <div class="row">
+
+                    <!-- Dashboard Box -->
+                    <div class="col-xl-12">
+                        <div class="dashboard-box margin-top-0">
+
+                            <!-- Headline -->
+                            <div class="headline">
+                                <h3><i class="icon-material-outline-supervisor-account"></i> [[${task.bidVos.size()}]] 竞标者</h3>
+                            </div>
+
+                            <div class="content">
+                                <ul class="dashboard-box-list">
+                                    <li th:each="bid : ${task.bidVos}">
+                                        <!-- Overview -->
+                                        <div class="freelancer-overview manage-candidates">
+                                            <div class="freelancer-overview-inner">
+
+                                                <!-- Avatar -->
+                                                <div class="freelancer-avatar">
+                                                    <a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${bid.employee.id}}"><img th:src="${bid.employee.headImg}" alt=""></a>
+                                                </div>
+
+                                                <!-- Name -->
+                                                <div class="freelancer-name">
+                                                    <h4><a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${bid.employee.id}}">[[${bid.employee.username}]]</a></h4>
+
+                                                    <!-- Details -->
+                                                    <span class="freelancer-detail-item" th:if="${bid.employee.phone != null}"><i class="icon-feather-phone"></i>[[${bid.employee.phone}]]</span>
+                                                    <span class="freelancer-detail-item" th:if="${bid.employee.email != null}"><a href="#"><i class="icon-feather-mail"></i>[[${bid.employee.email}]]</a></span>
+
+                                                    <!-- Bid Details -->
+                                                    <ul class="dashboard-task-info bid-info">
+                                                        <li><strong>￥[[${bid.bidPrice}]]</strong><span>投标价格</span></li>
+                                                        <li><strong>[[${bid.deliveryDesc}]]</strong><span>完成时间</span></li>
+                                                    </ul>
+
+                                                    <!-- Buttons -->
+                                                    <div class="buttons-to-right always-visible margin-top-25 margin-bottom-0">
+                                                        <a th:href="@{'/employer/acceptBid?taskId=' + ${task.id} + '&employeeId=' + ${bid.employee.id}}"  class="button ripple-effect"><i class="icon-material-outline-check"></i> 接受投标</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Row / End -->
+
+                                <!-- Footer -->
+                <div class="dashboard-footer-spacer"></div>
+                <div class="small-footer margin-top-15">
+                    <div class="small-footer-copyrights">
+                        @ 2019 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+                <!-- Footer / End -->
+
+            </div>
+        </div>
+        <!-- Dashboard Content / End -->
+
+    </div>
+    <!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Bid Acceptance Popup
+================================================== -->
+<div id="small-dialog-1" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab1">Accept Offer</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Accept Offer From David</h3>
+                    <div class="bid-acceptance margin-top-15">
+                        $3200
+                    </div>
+
+                </div>
+
+                <form id="terms">
+                    <div class="radio">
+                        <input id="radio-1" name="radio" type="radio" required>
+                        <label for="radio-1"><span class="radio-label"></span>  I have read and agree to the Terms and Conditions</label>
+                    </div>
+                </form>
+
+                <!-- Button -->
+                <button class="margin-top-15 button full-width button-sliding-icon ripple-effect" type="submit" form="terms">Accept <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Bid Acceptance Popup / End -->
+
+
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+</html>

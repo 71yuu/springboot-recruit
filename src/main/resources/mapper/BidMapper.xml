@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuu.recruit.mapper.BidMapper">
+  <resultMap id="BaseResultMap" type="com.yuu.recruit.domain.Bid">
+    <!--@mbg.generated generated on Tue Oct 15 14:38:36 CST 2019.-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="employee_id" jdbcType="BIGINT" property="employeeId" />
+    <result column="bid_price" jdbcType="DOUBLE" property="bidPrice" />
+    <result column="delivery_desc" jdbcType="VARCHAR" property="deliveryDesc" />
+    <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+    <result column="bid_status" jdbcType="TINYINT" property="bidStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Oct 15 14:38:36 CST 2019.-->
+    id, task_id, employee_id, bid_price, delivery_desc, delivery_time, bid_status, create_time
+  </sql>
+</mapper>

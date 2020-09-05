@@ -1,0 +1,327 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Recruit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="images/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div class="right-side" th:if="${session.employee != null}">
+
+                    <!--  User Notifications -->
+                    <div class="header-widget hide-on-mobile">
+
+                        <!-- Notifications -->
+                        <div class="header-notifications">
+
+                            <!-- Trigger -->
+                            <div class="header-notifications-trigger">
+                                <a href="#"><i class="icon-feather-bell"></i><span>4</span></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <div class="header-notifications-headline">
+                                    <h4>最新通知</h4>
+                                </div>
+
+                                <div class="header-notifications-content">
+                                    <div class="header-notifications-scroll" data-simplebar>
+                                        <ul>
+                                            <!-- Notification -->
+                                            <li class="notifications-not-read">
+                                                <a href="dashboard-manage-candidates.html">
+                                                    <div class="user-avatar"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+                                                    <span class="notification-text">
+													<strong>Yuu</strong> 投标了 <span class="color">xxxxxxxxxxxxxxxxxxxxxx任务</span>
+												</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--  User Notifications / End -->
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+                                        <div class="user-name">
+                                            Yuu <span>自由职业者</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employee/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</span>
+
+                </div>
+
+                <div class="right-side" th:if="${session.employee == null && session.employer == null}">
+
+                    <div class="header-widget">
+                        <a href="/login" class="log-in-button" style="margin-top: -24px;"><i class="icon-feather-log-in"></i> <span>登录</span></a>
+                        <a href="/register" class="log-in-button"><i class="icon-feather-log-in"></i> <span>注册</span></a>
+                    </div>
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+                        <button class="hamburger hamburger--collapse" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+				    </span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h2>注册</h2>
+
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs" class="dark">
+                        <ul>
+                            <li><a href="/index">首页</a></li>
+                            <li>注册</li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Page Content
+    ================================================== -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 offset-xl-3">
+
+                <div class="login-register-page">
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3 style="font-size: 26px;">创建您的帐户!</h3>
+                        <span>已经有账号? <a href="/login">登录!</a></span>
+                    </div>
+
+                    <!-- Form -->
+                    <form method="post" action="/register" id="register-account-form" onsubmit="return register()">
+                        <!-- Account Type -->
+                        <div class="account-type">
+                            <div>
+                                <input type="radio" name="accountType" id="freelancer-radio" class="account-type-radio" value="0" checked/>
+                                <label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> 自由职业者</label>
+                            </div>
+
+                            <div>
+                                <input type="radio" name="accountType" id="employer-radio" class="account-type-radio" value="1"/>
+                                <label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> 雇主</label>
+                            </div>
+                        </div>
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-baseline-mail-outline"></i>
+                            <input type="text" class="input-text with-border" name="username" id="username" placeholder="请输入用户名" required/>
+                        </div>
+
+                        <div class="input-with-icon-left" data-tippy-placement="bottom">
+                            <i class="icon-material-outline-lock"></i>
+                            <input type="password" class="input-text with-border" name="password" id="password" placeholder="请输入密码" required/>
+                        </div>
+
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-outline-lock"></i>
+                            <input type="password" class="input-text with-border" id="rePassword" placeholder="请输入重复密码" required/>
+                        </div>
+                        <!-- Button -->
+                        <button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit">注册 <i class="icon-material-outline-arrow-right-alt"></i></button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Spacer -->
+    <div class="margin-top-70"></div>
+    <!-- Spacer / End-->
+
+    <!-- Footer
+    ================================================== -->
+    <div id="footer" style="position: relative; top: 28px;">
+
+        <!-- Footer Top Section -->
+        <div class="footer-top-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+
+                        <!-- Footer Rows Container -->
+                        <div class="footer-rows-container">
+
+                            <!-- Left Side -->
+                            <div class="footer-rows-left">
+                                <div class="footer-row">
+                                    <div class="footer-row-inner footer-logo">
+                                        <img src="images/logo2.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Footer Rows Container / End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Top Section / End -->
+        <!-- Footer Copyrights -->
+        <div class="footer-bottom-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        © 2018 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Copyrights / End -->
+
+    </div>
+    <!-- Footer / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+
+<!-- 自定义 Script -->
+<script>
+
+    // 获取注册失败的消息
+    $(function () {
+        var msg = "[[${msg}]]"
+        console.log(msg)
+        if (msg != "") {
+            layer.msg(msg)
+        }
+    })
+
+    /**
+     * 注册验证,判断两次密码是否一样
+     */
+    function register() {
+        var password = $("#password").val();
+        var repeatPassword = $("#rePassword").val();
+
+        // 比较两次密码
+        if (password != repeatPassword) {
+            layer.msg('两次密码输入不一致')
+        }
+    }
+</script>
+</body>
+</html>

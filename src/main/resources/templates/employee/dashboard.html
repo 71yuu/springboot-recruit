@@ -1,0 +1,233 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth dashboard-header not-sticky">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="/images/logo.png" alt=""></a>
+                    </div>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employee.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employee.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employee.username}]] <span>[[${session.employee.tagline}]]</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employee/settings/base"><i class="icon-material-outline-settings"></i> 设置</a></li>
+                                    <li><a href="/employee/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+				</span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- Dashboard Sidebar
+        ================================================== -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-sidebar-inner" data-simplebar>
+                <div class="dashboard-nav-container">
+
+                    <!-- Navigation -->
+                    <div class="dashboard-nav">
+                        <div class="dashboard-nav-inner">
+
+                            <ul>
+                                <li class="active"><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i> 首页</a></li>
+                                <li><a href="/employee/bookmarks"><i class="icon-material-outline-star-border"></i>我的收藏</a></li>
+                                <li><a href="#"><i class="icon-material-outline-assignment"></i> 任务</a>
+                                    <ul>
+                                        <li><a href="/employee/task/completed">已完成任务</a></li>
+                                        <li><a href="/employee/task/uncompleted">待完成任务</a></li>
+                                        <li><a href="/employee/mybids">我的竞标</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><i class="icon-material-outline-settings"></i> 个人设置</a>
+                                    <ul>
+                                        <li><a href="/employee/settings/base">基本信息</a></li>
+                                        <li><a href="/employee/settings/password">修改密码</a></li>
+                                    </ul>
+                                </li>
+                                <li><a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${session.employee.id}}"><i class="icon-material-outline-home"></i> 我的主页</a></li>
+                                <li><a href="/employee/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <!-- Navigation / End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Sidebar / End -->
+
+
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner" >
+
+                <!-- Dashboard Headline -->
+                <div class="dashboard-headline">
+                    <h3>你好, [[${session.employee.username}]]!</h3>
+                    <span>很高兴再次见到你!</span>
+                </div>
+
+                <!-- Fun Facts Container -->
+                <div class="fun-facts-container">
+                    <div class="fun-fact" data-fun-fact-color="#36bd78">
+                        <div class="fun-fact-text">
+                            <span>任务投标中标</span>
+                            <h4>[[${bidCount}]]</h4>
+                        </div>
+                        <div class="fun-fact-icon"><i class="icon-material-outline-gavel"></i></div>
+                    </div>
+
+                    <!-- Last one has to be hidden below 1600px, sorry :( -->
+                    <div class="fun-fact" data-fun-fact-color="#2a41e6">
+                        <div class="fun-fact-text">
+                            <span>主页总浏览次数</span>
+                            <h4>[[${bowerCount}]]</h4>
+                        </div>
+                        <div class="fun-fact-icon"><i class="icon-feather-trending-up"></i></div>
+                    </div>
+                </div>
+
+                <!-- Row -->
+                <div class="row">
+                    <!-- Dashboard Box -->
+                    <div class="col-xl-12">
+                        <div class="dashboard-box">
+                            <div class="headline">
+                                <h3><i class="icon-material-baseline-notifications-none"></i> 最近主页浏览情况</h3>
+                            </div>
+                            <div class="content">
+                                <ul class="dashboard-box-list">
+                                    <li th:each="homeBower : ${homeBowers}">
+                                        <span class="notification-text">
+                                            <a href="#"><div class="user-avatar status-online"><img th:src="${homeBower.employer.headImg}" alt=""></div>[[${homeBower.employer.username}]] </a> 在 [[${#dates.format(homeBower.createTime, 'yyyy-MM-dd HH:mm:ss')}]] 浏览了您的主页
+										    <!--<strong>任务</strong> 已被 <a href="#">名称中标</a>-->
+									    </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row / End -->
+
+                <!-- Footer -->
+                <div class="dashboard-footer-spacer"></div>
+                <div class="small-footer margin-top-15">
+                    <div class="small-footer-copyrights">
+                        @ 2019 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+                <!-- Footer / End -->
+
+            </div>
+        </div>
+        <!-- Dashboard Content / End -->
+
+    </div>
+    <!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+
+
+</body>
+</html>

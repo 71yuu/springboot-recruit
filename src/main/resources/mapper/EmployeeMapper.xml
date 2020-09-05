@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuu.recruit.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.yuu.recruit.domain.Employee">
+    <!--@mbg.generated generated on Thu Oct 17 00:12:43 CST 2019.-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    <result column="tagline" jdbcType="VARCHAR" property="tagline" />
+    <result column="profile" jdbcType="LONGVARCHAR" property="profile" />
+    <result column="browse_count" jdbcType="INTEGER" property="browseCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Thu Oct 17 00:12:43 CST 2019.-->
+    id, username, `password`, email, phone, head_img, tagline, profile, browse_count,
+    create_time
+  </sql>
+</mapper>

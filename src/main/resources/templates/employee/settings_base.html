@@ -1,0 +1,351 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/colors/blue.css">
+
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth dashboard-header not-sticky">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="/index"><img src="/images/logo.png" alt=""></a>
+                    </div>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#"><div class="user-avatar status-online"><img th:src="${session.employee.headImg}" alt=""></div></a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online"><img th:src="${session.employee.headImg}" alt=""></div>
+                                        <div class="user-name">
+                                            [[${session.employee.username}]] <span>[[${session.employee.tagline}]]</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i>个人中心</a></li>
+                                    <li><a href="/employee/settings/base"><i class="icon-material-outline-settings"></i> 设置</a></li>
+                                    <li><a href="/employee/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+                    </span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- Dashboard Sidebar
+        ================================================== -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-sidebar-inner" data-simplebar>
+                <div class="dashboard-nav-container">
+
+                    <!-- Navigation -->
+                    <div class="dashboard-nav">
+                        <div class="dashboard-nav-inner">
+
+                            <ul>
+                                <li><a href="/employee/dashboard"><i class="icon-material-outline-dashboard"></i> 首页</a></li>
+                                <li><a href="/employee/bookmarks"><i class="icon-material-outline-star-border"></i>我的收藏</a></li>
+                                <li><a href="#"><i class="icon-material-outline-assignment"></i> 任务</a>
+                                    <ul>
+                                        <li><a href="/employee/task/completed">已完成任务</a></li>
+                                        <li><a href="/employee/task/uncompleted">待完成任务</a></li>
+                                        <li><a href="/employee/mybids">我的竞标</a></li>
+                                    </ul>
+                                </li>
+                                <li  class="active active-submenu"><a><i class="icon-material-outline-settings"></i> 个人设置</a>
+                                    <ul>
+                                        <li class="active"><a href="/employee/settings/base">基本信息</a></li>
+                                        <li><a href="/employee/settings/password">修改密码</a></li>
+                                    </ul>
+                                </li>
+                                <li><a target="_blank" th:href="@{'/employee/profile?employeeId=' + ${session.employee.id}}"><i class="icon-material-outline-home"></i> 我的主页</a></li>
+                                <li><a href="/employee/logout"><i class="icon-material-outline-power-settings-new"></i> 退出登录</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <!-- Navigation / End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Sidebar / End -->
+
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner" >
+
+                <!-- Dashboard Headline -->
+                <div class="dashboard-headline">
+                    <h3>个人设置</h3>
+                </div>
+                <form method="post" action="/employee/settings/base/save">
+                    <input th:hidden="true" th:value="${session.employee.id}" name="id" />
+                      <!-- Row -->
+                    <div class="row">
+                            <!-- Dashboard Box -->
+                            <div class="col-xl-12">
+                                    <div class="dashboard-box margin-top-0">
+
+                                        <!-- Headline -->
+                                        <div class="headline">
+                                            <h3><i class="icon-material-outline-account-circle"></i> 我的账户</h3>
+                                        </div>
+
+                                        <div class="content with-padding padding-bottom-0">
+
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <div class="avatar-wrapper" data-tippy-placement="bottom" title="修改头像">
+                                                        <img class="profile-pic" th:src="${employee.headImg}" alt="" />
+                                                        <div class="upload-button"></div>
+                                                        <input id="dropzFile" onchange="updateHeadImg()" name="dropzFile" class="file-upload" type="file" accept="image/*"/>
+                                                    </div>
+                                                    <input id="headImg" name="headImg" th:hidden="true" th:value="${employee.headImg}"/>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="row">
+
+                                                        <div class="col-xl-6">
+                                                            <div class="submit-field">
+                                                                <h5>用户名</h5>
+                                                                <input name="username" type="text" class="with-border" placeholder="请填写您的用户名" th:value="${employee.username}" disabled>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xl-6">
+                                                            <div class="submit-field">
+                                                                <h5>手机号</h5>
+                                                                <input name="phone" type="text" class="with-border" placeholder="请填写您的手机号" th:value="${employee.phone}" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xl-12">
+                                                            <div class="submit-field">
+                                                                <h5>邮箱</h5>
+                                                                <input name="email" type="text" class="with-border" placeholder="请填写您的邮箱" th:value="${employee.email}" required>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <!-- Dashboard Box -->
+                            <div class="col-xl-12">
+                                <div class="dashboard-box">
+
+                                    <!-- Headline -->
+                                    <div class="headline">
+                                        <h3><i class="icon-material-outline-face"></i> 我的简介</h3>
+                                    </div>
+                                    <div class="content">
+                                        <ul class="fields-ul">
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-xl-12">
+                                                        <div class="submit-field">
+                                                            <h5>标语</h5>
+                                                            <input name="tagline" placeholder="请填写您的标语" type="text" class="with-border" th:value="${employee.tagline}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="fields-ul">
+                                                <div class="col-xl-4">
+                                                    <div class="submit-field">
+                                                        <h5>技能</h5>
+
+                                                        <!-- Skills List -->
+                                                        <div class="keywords-container">
+                                                            <div class="keyword-input-container">
+                                                                <input id="skill" name="skill" type="text" class="keyword-input with-border" placeholder="请输入您所掌握的技能">
+                                                                <button class="keyword-input-button ripple-effect" onclick="addSkill()"><i class="icon-material-outline-add"></i></button>
+                                                            </div>
+                                                            <div class="keywords-list" style="height: auto;">
+                                                                <span class="keyword" th:each="skill : ${employee.skills}"><span th:onclick="deleteSkill([[${skill.id}]])" class="keyword-remove"></span><span class="keyword-text">[[${skill.skillName}]]</span></span>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="fields-ul">
+                                                <div class="row">
+                                                    <div class="col-xl-12">
+                                                        <div class="submit-field">
+                                                            <h5>自我介绍</h5>
+                                                            <textarea name="profile" cols="30" rows="5" class="with-border" placeholder="请填写您的自我介绍..." th:text="${employee.profile}" required>请填写您的自我介绍...</textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="col-xl-12">
+                                <button type="submit" class="button ripple-effect big margin-top-30">保存更改</button>
+                            </div>
+                    </div>
+                <!-- Row / End -->
+                </form>
+
+                <!-- Footer -->
+                <div class="dashboard-footer-spacer"></div>
+                <div class="small-footer margin-top-15">
+                    <div class="small-footer-copyrights">
+                        @ 2019 <strong>yuu</strong>. All Rights Reserved.
+                    </div>
+                </div>
+                <!-- Footer / End -->
+
+            </div>
+        </div>
+        <!-- Dashboard Content / End -->
+
+    </div>
+    <!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Scripts
+================================================== -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
+<script src="/js/ajaxfileupload.js"></script>
+
+
+<!-- 自定义 Script -->
+<script>
+
+    // 修改头像
+    function updateHeadImg() {
+        $.ajaxFileUpload({
+            url:'/upload',//用于文件上传的服务器端请求地址
+            secureuri:false ,//一般设置为false
+            fileElementId:'dropzFile',//文件上传控件的id属性  <input type="file" id="upload" name="upload" />
+            dataType: 'text',//返回值类型 一般设置为json
+            success: function (responseText)  //服务器成功响应处理函数
+            {
+                var obj = $.parseJSON(responseText.toString().replace(/<.*?>/ig,""));
+                $("#headImg").val(obj.filePath)
+            }
+        });
+    }
+
+    /**
+     * 添加技能
+     */
+    function addSkill() {
+        var skillName = $("#skill").val()
+        $.post({
+            url: '/employee/skill/add',
+            data: {
+                "skillName": skillName
+            }
+        })
+    }
+
+    /**
+     * 删除技能
+     */
+    function deleteSkill(skillId) {
+        $.post({
+            url: '/employee/skill/delete',
+            data: {
+                "skillId": skillId
+            }
+        })
+    }
+</script>
+
+
+</body>
+</html>
