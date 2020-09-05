@@ -31,7 +31,7 @@
 
   ![](https://yuu-blog.oss-cn-shenzhen.aliyuncs.com/Yuu_2020-09-05_23-56-56.png)
 
-##　部署
+## 部署
 
 - 导入数据库脚本 `sql/recruit.sql`
 - 修改 `application.yml` 数据库连接
