@@ -1,4 +1,4 @@
-## Spring Boot + Thymeleaf 实现的任务发布网站
+## Spring Boot + Thymeleaf 实现的任务发布网
 
 - 角色：
   - 管理员
