@@ -26,7 +26,7 @@
         <pagehelper.version>1.2.5</pagehelper.version>
         <aliyun-sms.version>1.2.0</aliyun-sms.version>
     </properties>
-
+<!-- 测试以下fork -->
     <dependencies>
         <!-- Spring Boot Begin -->
         <dependency>
